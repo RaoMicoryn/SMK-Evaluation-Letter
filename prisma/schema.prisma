@@ -1,0 +1,37 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL") // dipakai migrate; untuk Neon isi dengan koneksi non-pooler
+}
+
+enum EvaluationStatus {
+  baru
+  dibaca
+  ditindaklanjuti
+  selesai
+}
+
+model Evaluation {
+  id                 String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  category           String   @db.VarChar(50)
+  rating             Int
+  positiveFeedback   String?  @map("positive_feedback") @db.Text
+  improvementsNeeded String?  @map("improvements_needed") @db.Text
+  isAnonymous        Boolean  @default(true) @map("is_anonymous")
+  reporterName       String?  @map("reporter_name") @db.VarChar(100)
+  createdAt          DateTime @default(now()) @map("created_at") @db.Timestamptz(3)
+
+  // Moderasi (dipakai halaman admin)
+  status             EvaluationStatus @default(baru)
+  internalNote       String?  @map("internal_note") @db.Text
+  hiddenAt           DateTime? @map("hidden_at") @db.Timestamptz(3)
+  updatedAt          DateTime @default(now()) @updatedAt @map("updated_at") @db.Timestamptz(3)
+
+  @@index([category, createdAt(sort: Desc)])
+  @@index([status])
+  @@map("evaluations")
+}

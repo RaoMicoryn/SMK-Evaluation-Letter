@@ -1,0 +1,62 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ── Reset ringan (preflight Tailwind dimatikan agar tidak bentrok dengan Ant Design) ── */
+*, *::before, *::after { box-sizing: border-box; border: 0 solid #C4E1F7; }
+body { margin: 0; color: #234E8E; -webkit-tap-highlight-color: transparent; }
+:where(h1, h2, h3, p, ul, ol, figure) { margin: 0; }
+:where(ul, ol) { padding: 0; list-style: none; }
+:where(svg, img) { display: block; vertical-align: middle; }
+:where(button) { font-family: inherit; background: transparent; padding: 0; color: inherit; cursor: pointer; }
+
+/* Font heading (Baloo 2) tebal secara default; utilitas font-* tetap bisa menimpa */
+@layer components {
+  .font-display { font-weight: 700; letter-spacing: -0.005em; }
+}
+
+/* Counter karakter di POJOK KANAN BAWAH dalam textarea */
+.ant-input-textarea-show-count { position: relative; }
+.ant-input-textarea-show-count .ant-input-data-count {
+  position: absolute; right: 14px !important; bottom: 8px !important;
+  font-size: 13px; color: #9DBBD9; pointer-events: none;
+}
+.ant-input-textarea-show-count textarea.ant-input { padding-bottom: 30px; }
+
+/* fokus keyboard yang jelas */
+button:focus-visible { outline: 3px solid #FFD966; outline-offset: 2px; }
+
+@media (prefers-reduced-motion: reduce) {
+  * { animation: none !important; transition: none !important; }
+}
+
+/* ── animasi kecil pada ilustrasi SVG ── */
+@keyframes blink { 0%, 90%, 100% { transform: scaleY(1); } 94% { transform: scaleY(.08); } }
+.puppy-eyes { transform-box: fill-box; transform-origin: center; animation: blink 4.8s infinite; }
+@keyframes earFlap { 0%, 88%, 100% { transform: rotate(0); } 93% { transform: rotate(-3deg); } }
+.puppy-ear { transform-box: fill-box; transform-origin: 80% 10%; animation: earFlap 6s ease-in-out infinite; }
+
+/* ── Poles tambahan ── */
+html { scroll-behavior: smooth; }
+::selection { background: #FFE08A; color: #234E8E; }
+
+/* input & select lebih lembut, ada efek hover/fokus yang jelas */
+.ant-input, .ant-input-affix-wrapper, .ant-select-selector, textarea.ant-input {
+  background: #fff !important;
+  box-shadow: 0 2px 0 #E3F1FC, inset 0 1px 2px rgba(79, 134, 198, .08);
+  transition: box-shadow .2s, border-color .2s, transform .2s;
+}
+.ant-input:hover, .ant-select:hover .ant-select-selector { border-color: #8EC1EE !important; }
+.ant-input:focus, .ant-input-focused, .ant-select-focused .ant-select-selector {
+  border-color: #4F86C6 !important;
+  box-shadow: 0 0 0 4px rgba(79, 134, 198, .18) !important;
+}
+textarea.ant-input { line-height: 1.6; resize: none; }
+
+/* scrollbar halus */
+* { scrollbar-width: thin; scrollbar-color: #BFDDF6 transparent; }
+
+/* kartu utama di desktop: sedikit kilau di tepi atas */
+@media (min-width: 1024px) {
+  body { background: #D3E9FA; }
+}
