@@ -4,6 +4,7 @@ import { App, Button, ConfigProvider } from 'antd';
 import idID from 'antd/locale/id_ID';
 import axios from 'axios';
 import { usePathname, useRouter } from 'next/navigation';
+import Credit from '@/components/evaluasi/Credit';
 
 export default function AdminShell({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
@@ -41,6 +42,7 @@ export default function AdminShell({ children }: { children: React.ReactNode }) 
             </header>
           )}
           {children}
+          <Credit className="pb-4 text-center" />
         </div>
       </App>
     </ConfigProvider>

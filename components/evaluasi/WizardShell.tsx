@@ -1,6 +1,7 @@
 import type { ReactNode } from 'react';
 import { CheckOutlined } from '@ant-design/icons';
 import type { Screen } from '@/lib/evaluasi';
+import Credit from '@/components/evaluasi/Credit';
 import { PuppyBox } from './decor/Mascot';
 import {
   Cloud, Cross, Dashes, Dot, Heart, HouseOutline, HouseSolid, Paw, Plane, Plus, Sparkle4, Star,
@@ -175,6 +176,8 @@ export default function WizardShell({ children, screen }: { children: ReactNode;
           <main className="relative z-10">{children}</main>
         </div>
       </div>
+
+      <Credit className="absolute inset-x-0 bottom-2 z-10 text-center" />
     </div>
   );
 }

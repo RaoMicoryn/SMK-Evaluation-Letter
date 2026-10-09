@@ -1,0 +1,1 @@
+export const CREDIT_NAME = 'WB || Kyo-Motion';
